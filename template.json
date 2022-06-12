@@ -1,0 +1,30 @@
+{
+    "package": {
+        "main": "main/index.js",
+        "devDependencies": {
+            "concurrently": "^7.1.0",
+            "electron": "^18.0.3",
+            "electron-packager": "^15.4.0",
+            "react": "^18.0.0",
+            "react-dom": "^18.0.0",
+            "react-router-dom": "^6.3.0",
+            "react-scripts": "~5.0.1",
+            "wait-on": "^6.0.1"
+        },
+        "scripts": {
+            "start": "concurrently \"npm run start:react\" \"npm run start:electron\"",
+            "start:react": "react-scripts start",
+            "start:electron": "wait-on http://127.0.0.1:3000 && electron .",
+            "build": "npm run build:react && npm run package",
+            "build:react": "react-scripts build",
+            "package": "electron-packager . --asar --out=out --overwrite --ignore=out --ignore=src --ignore=public --ignore=node_modules/.cache"
+        },
+        "eslintConfig": {
+            "extends": [
+                "react-app",
+                "react-app/jest"
+            ]
+        },
+        "browserslist": "electron >= 18"
+    }
+}
